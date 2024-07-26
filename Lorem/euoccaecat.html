@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Visualization</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="treeCanvas" width="800" height="600"></canvas>
+
+<script>
+// Define the structure of the tree with customized positions
+const tree = {
+    x: 400,   // Centering the root node horizontally on an 800px wide canvas
+    y: 50,    // Positioning the root node near the top
+    r: 10,    // Radius of the root node
+    depth: 0, // Root node is at depth 0
+    children: [
+        {
+            x: 250,  // Positioning the child node to the left
+            y: 150,  // Positioning the child node downward
+            r: 8,    // Radius of the child node
+            depth: 1,
+            children: [
+                {
+                    x: 200, // Further positioning the grandchild node to the left
+                    y: 250, // Further positioning the grandchild node downward
+                    r: 6,   // Radius of the grandchild node
+                    depth: 2,
+                    children: []
+                }
+            ]
+        },
+        {
+            x: 550,  // Positioning another child node to the right
+            y: 150,  // Positioning the child node downward
+            r: 8,    // Radius of the child node
+            depth: 1,
+            children: []
+        }
+    ]
+};
+
+// Function to draw each node and its connections
+function drawNode(ctx, node) {
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2); // Drawing the node as a circle
+    ctx.fillStyle = 'blue'; // Setting the fill color for the node
+    ctx.fill(); // Filling the node with the specified color
+
+    node.children.forEach(child => {
+        // Draw line from this node to each child node
+        ctx.beginPath();
+        ctx.moveTo(node.x, node.y); // Starting point of the line
+        ctx.lineTo(child.x, child.y); // Ending point of the line
+        ctx.stroke(); // Drawing the line
+
+        // Recursively draw each child node
+        drawNode(ctx, child);
+    });
+}
+
+// Get the canvas element and its context for drawing
+const canvas = document.getElementById('treeCanvas');
+const ctx = canvas.getContext('2d');
+
+// Call the function to draw the tree starting from the root node
+drawNode(ctx, tree);
+</script>
+
+</body>
+</html>
