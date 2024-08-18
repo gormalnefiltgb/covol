@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Stroke Example</title>
+</head>
+<body>
+    <svg width="200" height="200">
+        <!-- Circle element -->
+        <circle id="myCircle" cx="100" cy="100" r="50" fill="red" />
+    </svg>
+
+    <script>
+        // Access the circle element
+        const item = document.getElementById('myCircle');
+        
+        // Set the stroke color to black
+        item.setAttribute('stroke', '#000');
+        
+        // Optionally set the stroke width
+        item.setAttribute('stroke-width', '4');
+    </script>
+</body>
+</html>
